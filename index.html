@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Usage Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="assets/logo.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/logo.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/logo.png" />
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Energy Usage Tracker</h1>
+            <button id="theme-toggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+        </header>
+
+        <main>
+            <div class="tabs">
+                <button class="tab active" data-tab="entries">Entries</button>
+                <button class="tab" data-tab="stats">Statistics</button>
+                <button class="tab" data-tab="import-export">Import/Export</button>
+            </div>
+
+            <div class="tab-content active" id="entries-tab">
+                <div class="year-selector">
+                    <button id="prev-year"><i class="fas fa-chevron-left"></i></button>
+                    <h2 id="current-year">2023</h2>
+                    <button id="next-year"><i class="fas fa-chevron-right"></i></button>
+                    <button id="add-year" class="secondary">Add Year</button>
+                </div>
+
+                <div class="entry-form">
+                    <h3>Add New Reading</h3>
+                    <div class="form-group">
+                        <label for="month">Month:</label>
+                        <select id="month">
+                            <option value="0">January</option>
+                            <option value="1">February</option>
+                            <option value="2">March</option>
+                            <option value="3">April</option>
+                            <option value="4">May</option>
+                            <option value="5">June</option>
+                            <option value="6">July</option>
+                            <option value="7">August</option>
+                            <option value="8">September</option>
+                            <option value="9">October</option>
+                            <option value="10">November</option>
+                            <option value="11">December</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="electricity">Electricity (kWh):</label>
+                        <input type="number" id="electricity" min="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="gas">Gas (m³):</label>
+                        <input type="number" id="gas" min="0" step="0.01">
+                    </div>
+                    <button id="add-entry">Add Reading</button>
+                </div>
+
+                <div class="entries-list">
+                    <h3>Monthly Readings</h3>
+                    <div id="entries-container"></div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="stats-tab">
+                <h2>Usage Statistics</h2>
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <h4>Total Electricity</h4>
+                        <p id="total-electricity">0 kWh</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Total Gas</h4>
+                        <p id="total-gas">0 m³</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Average Monthly Electricity</h4>
+                        <p id="avg-electricity">0 kWh</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Average Monthly Gas</h4>
+                        <p id="avg-gas">0 m³</p>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="usage-chart"></canvas>
+                </div>
+            </div>
+
+            <div class="tab-content" id="import-export-tab">
+                <h2>Data Management</h2>
+                <div class="data-actions">
+                    <div class="action-group">
+                        <h3>Export Data</h3>
+                        <p>Download all your energy readings as a JSON file.</p>
+                        <button id="export-data">Export Data</button>
+                    </div>
+                    <div class="action-group">
+                        <h3>Import Data</h3>
+                        <p>Upload a JSON file to import your energy readings.</p>
+                        <input type="file" id="import-file" accept=".json">
+                        <button id="import-data">Import Data</button>
+                    </div>
+                    <div class="action-group warning">
+                        <h3>Clear Data</h3>
+                        <p>Permanently delete all your energy readings.</p>
+                        <button id="clear-data" class="danger">Clear All Data</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
